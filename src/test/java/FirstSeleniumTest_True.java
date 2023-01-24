@@ -31,6 +31,7 @@ public class FirstSeleniumTest_True {
         driver.findElement(By.name("password")).sendKeys("test@gmail.com");
         driver.findElement(By.cssSelector(".btn.btn-info"));
     }
+
         @Test
         public void registerNewUser() throws InterruptedException {
             String userData = "jeffry080";
