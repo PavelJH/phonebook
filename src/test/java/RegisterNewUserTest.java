@@ -32,4 +32,5 @@ public class RegisterNewUserTest extends TestBase {
         fillField(userData, confirmPasswordField);
         driver.findElement(loginButton).click();
     }
+
 }
