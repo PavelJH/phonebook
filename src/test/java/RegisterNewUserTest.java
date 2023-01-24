@@ -1,3 +1,4 @@
+import com.github.javafaker.Faker;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -17,10 +18,11 @@ public class RegisterNewUserTest extends TestBase {
     By passwordField = By.cssSelector("[placeholder=\"Password\"]");
     By confirmPasswordField = By.cssSelector("[ng-reflect-name=\"confirm_password\"]");
     By loginButton = By.xpath("//*[@type=\"submit\"]");
+    Faker faker = new Faker();
 
     @Test
     public void registerNewUser() {
-        String userData = "test3@gmail.com";
+        String userData = faker.internet().emailAddress();
 
         driver.findElement(loginForm).isDisplayed();
         driver.findElement(userRegistrationLink).click();
