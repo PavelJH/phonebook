@@ -20,15 +20,16 @@ public class RegisterNewUserTest extends TestBase {
     By passwordField = By.cssSelector("[placeholder=\"Password\"]");
     By confirmPasswordField = By.cssSelector("[ng-reflect-name=\"confirm_password\"]");
     By loginButton = By.xpath("//*[@type=\"submit\"]");
-    By errorMessageBlock = By.id("error-massage");
+    By errorMessageBlock = By.id("error-message");
     Faker faker = new Faker();
 
     @Test
     public void registerNewUser() {
+        //Arrange - Данные
         String userData = faker.internet().emailAddress();
         String password = faker.internet().password();
-        String expectedErrorMessage = " noErrorMsg ";
-
+        String expectedErrorMessage = "noErrorMsg";
+        //Act - Действие
         driver.findElement(loginForm).isDisplayed();
         driver.findElement(userRegistrationLink).click();
         driver.findElement(registrationForm).isDisplayed();
@@ -37,6 +38,8 @@ public class RegisterNewUserTest extends TestBase {
         fillField(password, confirmPasswordField);
         driver.findElement(loginButton).click();
         String actualErrorMessage = driver.findElement(errorMessageBlock).getText(); // find text error message
-        Assert.assertEquals(actualErrorMessage, expectedErrorMessage, "");
+        //Assert
+        String err = "Actual error message is not equal expected";
+        Assert.assertEquals(actualErrorMessage, expectedErrorMessage, err);
     }
 }
