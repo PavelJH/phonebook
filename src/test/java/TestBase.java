@@ -1,10 +1,12 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+
 
 import java.util.concurrent.TimeUnit;
 
@@ -26,6 +28,16 @@ public class TestBase {
         driver.findElement(locator).click();
         driver.findElement(locator).sendKeys(userData);
     }
+    public boolean isElementPresent(By by) {//проверка, сушечтвует ли элемент
+        try {
+            driver.findElement(by);// try to found over element
+            return true;// if we found element - true
+        } catch (NoSuchElementException exception) {// catch - ловить
+            exception.printStackTrace();//это означает, что в терминал, если это условие выполняется,
+            // точнее предыдушее не выполняется, будет вывдиься это сообщение//
+            return false;// вывлжится - false
+        }//Трай пробует(и у него не получилось, то катч отлавливает, что у него не оплучилось), катч отлавливвает
+    }
     @AfterMethod
     public void tearDown() throws InterruptedException {
         Thread.sleep(1000);
@@ -33,4 +45,5 @@ public class TestBase {
             driver.quit();
         }
     }
-}
+
+    }
