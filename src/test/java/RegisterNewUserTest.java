@@ -41,5 +41,15 @@ public class RegisterNewUserTest extends TestBase {
         //Assert
         String err = "Actual error message is not equal expected";
         Assert.assertEquals(actualErrorMessage, expectedErrorMessage, err);
+
+        //Negative Test -1
+        By actualUserRegistrationLink = By.cssSelector("[/user/forgotpassword]");// incorrect locator
+        By expectedUserRegistrationLink = By.cssSelector("[href=/user/registration]");// correct locator
+        Assert.assertNotEquals(actualUserRegistrationLink, expectedUserRegistrationLink);
+        //Negative Test 02
+        Assert.assertFalse(isElementPresent(By.xpath("registration-form"))); //wrong selector for registration form
+        Assert.assertFalse(isElementPresent(By.cssSelector("type=\"password\""))); //write wrong address
+        Assert.assertFalse(isElementPresent(By.cssSelector("[\"Confirm Password\"]")));
+        Assert.assertFalse(isElementPresent(By.xpath("//*[@type=\"button\"]")));
     }
 }

@@ -9,26 +9,27 @@ public class CreateContactCase extends Login{
 //    }
     @Test
     public void createContact(){
-        String firstName = "12";
-        String lastName = "12";
-        String description = "12";
+        String firstName = "Pavel";
+        String lastName = "Kelbas";
+        String description = "I am a best in the World, at what I do";
         Number expectedCountRow = 1;
         //String firstAndLAstName = firstName + lastName;
         //click on the button"Add new contact"
         driver.findElement(By.cssSelector("[href='/contacts']")).click();
         //Check rope dialog(if one dialog - role)
-        Assert.assertTrue(isElementPresent(By.xpath("//*[@role='dialog'])")));//проверяем, что есть все диалоговые окна, так как *
+        Assert.assertTrue(isElementPresent(By.xpath("//*[@role='dialog']")));//проверяем, что есть все диалоговые окна, так как *
         //Fill field "first name"
-        fillField(firstName,By.xpath("//*[@role='dialog']//*[placeholder='First name']"));//отталкиваемся от одного локатара - //*[@role='dialog'] - и в нем ишем другой - *[placeholder='First name']"
+        fillField(firstName,By.xpath("//input[@id='form-name']")); //отталкиваемся от одного локатара - //*[@role='dialog'] - и в нем ишем другой - *[placeholder='First name']"
         //Fill field "last name"
-        fillField(lastName,By.xpath("//*[@role='dialog']//*[placeholder='Last name']"));
+        fillField(lastName,By.xpath("//input[@id='form-lastName']"));
         //Fill field "About"
-        fillField(description,By.xpath("//*[@role='dialog']//*[placeholder='About']"));
+        fillField(description,By.xpath("//input[@id='form-about']"));
         //Click on the button "Save"
-        driver.findElement(By.xpath("//*[@type='submit']")).click();
+        driver.findElement(By.xpath("//button[@class='btn btn-primary']")).click();
         Assert.assertFalse(isElementPresent(By.xpath("//*[@role='dialog'])")));;
+        driver.findElement(By.xpath("//a[@class='navbar-brand']//*[name()='svg']")).click();
         //Filter by creature name
-        fillField(firstName, By.xpath("//*[placeholder='Search...']"));
+        fillField(firstName, By.xpath("//input[@id='input-search-contact']"));
 
         Number actualCountRow = driver.findElements(By.className("list-group")).size();// считаем сколько у нас строчек
         Assert.assertEquals(actualCountRow, expectedCountRow);// актуальный результат и ожидаемый
