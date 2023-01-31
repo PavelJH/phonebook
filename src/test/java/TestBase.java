@@ -38,6 +38,15 @@ public class TestBase {
             return false;// вывлжится - false
         }//Трай пробует(и у него не получилось, то катч отлавливает, что у него не оплучилось), катч отлавливвает
     }
+    public boolean isElementClickable(By by) {//проверка, кликабельный элемент
+        try {
+            driver.findElement(by).click();
+            return true;
+        } catch (NoSuchElementException exception) {
+            exception.printStackTrace();
+            return false;
+        }
+    }
     @AfterMethod
     public void tearDown() throws InterruptedException {
         Thread.sleep(1000);

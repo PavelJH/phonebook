@@ -3,7 +3,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class Login extends TestBase {
+public class Login extends TestBase { // Login отдельно, потомучто его будем использовать всегда, кроме Create User
 
     By loginForm = By.id("login-form");
     By emailField = By.cssSelector("[placeholder=\"Email\"]");
