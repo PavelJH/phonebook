@@ -31,6 +31,9 @@ public class CreateContactCase extends Login{
         //Filter by creature name
         fillField(firstName, By.xpath("//input[@id='input-search-contact']"));
 
+
+
+
         Number actualCountRow = driver.findElements(By.className("list-group")).size();// считаем сколько у нас строчек
         Assert.assertEquals(actualCountRow, expectedCountRow);// актуальный результат и ожидаемый
         //Expect result: Created contact show with correct data in the contact table
