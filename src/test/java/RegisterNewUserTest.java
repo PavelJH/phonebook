@@ -80,8 +80,6 @@ public class RegisterNewUserTest extends TestBase {
         */
     }
 
-
-
     //Negative
     @Test
     public void registerNewUserWithInvalidData() {
