@@ -3,6 +3,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -46,6 +47,11 @@ public class TestBase {
             exception.printStackTrace();
             return false;
         }
+    }
+    public void CheckItemText(By locator, String expectedText, String err) {// перенесли с register
+        String actualText = driver.findElement(locator).getText(); // find text error message
+        // тут вырезали и перенесли в checkErrorMessage
+        Assert.assertEquals(actualText, expectedText, err);
     }
     @AfterMethod
     public void tearDown() throws InterruptedException {

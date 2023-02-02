@@ -1,18 +1,9 @@
 import com.github.javafaker.Faker;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
-
-public class RegisterNewUserTest extends TestBase {
+public class RegisterNewUserTest extends ChangeLanguage {
     By loginForm = By.id("login-form");
     By userRegistrationLink = By.cssSelector("[href=\"/user/registration\"]");
     By registrationForm = By.id("registration-form");
@@ -41,10 +32,10 @@ public class RegisterNewUserTest extends TestBase {
         driver.findElement(loginButton).isEnabled();
     }
     private void checkErrorMessage(By locator, String expectedErrorMessage) {
-        String actualErrorMessage = driver.findElement(locator).getText(); // find text error message
-        String err = "Actual error message is not equal expected";
-        Assert.assertEquals(actualErrorMessage, expectedErrorMessage, err);
+        String err = "Actual error message is not equal expected";// можно менять один ерор для всех трех тестов
+        CheckItemText(locator, expectedErrorMessage, err);
     }
+
 
 
     //Positive
