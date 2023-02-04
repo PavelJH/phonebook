@@ -1,9 +1,11 @@
+package phonebook;
+
 import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class CreateContactCase extends Login{
+public class CreateContactCase extends Login {
 //    @Test
 //    void check_login(){ // запускаюся все beformethod
 Faker faker = new Faker();
@@ -63,18 +65,13 @@ private void openAddNewContactDialog() {
         fillAddNewContact(firstName, lastName, description);
         //Click on the button "Save"
         saveNewContact();
-
         checkFieldsOnContactInfoAfterCreatedContackt(firstName, lastName, description);
-
-
         goToContactPageAndFillFilterField(firstName);
-
-
         checkCountRows(expectedCountRow);
         //Expect result: Created contact show with correct data in the contact table
 
     }
-    @Test
+    //@Test
     //TODO  //checkitemtext (checkFieldsOnContactInfoAfterCreatedContackt) - переходим после поиска на контаки и проверяем введеные данные
 // вынисти локаторы в отдельно, как в register user
 

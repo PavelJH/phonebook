@@ -1,3 +1,5 @@
+package phonebook;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -62,7 +64,7 @@ public class FirstSeleniumTest {
             String userData = "jeffry080";
             String userOtherData = "jeffry";
             driver.findElement(By.id("login-form")).isDisplayed(); //отображение(проверяет), есть ли эта форма (login)
-            // Todo - Написать проверку есть ли кнопка Login
+            // Todo - Написать проверку есть ли кнопка phonebook.Login
             driver.findElement(By.cssSelector("[href=\"/user/registration\"]")).click();
             driver.findElement(By.id("registration-form")).isDisplayed();
             fillField(emailField, "jefr@gmail.com");

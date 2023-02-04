@@ -1,9 +1,11 @@
+package phonebook;
+
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import phonebook.TestBase;
 
-public class Login extends TestBase { // Login отдельно, потомучто его будем использовать всегда, кроме Create User
+public class Login extends TestBase { // phonebook.Login отдельно, потомучто его будем использовать всегда, кроме Create User
 
     By loginForm = By.id("login-form");
     By emailField = By.cssSelector("[placeholder=\"Email\"]");

@@ -1,7 +1,10 @@
+package phonebook;
+
 import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import phonebook.ChangeLanguage;
 
 public class RegisterNewUserTest extends ChangeLanguage {
     By loginForm = By.id("login-form");
@@ -112,7 +115,7 @@ public class RegisterNewUserTest extends ChangeLanguage {
         //Arrange - Данные
         String userData = "test@gmail.com";
         String password = "test@gmail.com";
-        String expectedErrorMessage = "Error! User already exists Login now?";
+        String expectedErrorMessage = "Error! User already exists phonebook.Login now?";
         //Act - Действие
         goToRegistrationPage();
         fillRegistrationForm(userData, password);
