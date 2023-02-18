@@ -1,11 +1,11 @@
-package phonebook;
+package e2e.helpers;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
-import phonebook.TestBase;
 
-public class Login extends TestBase { // phonebook.Login отдельно, потомучто его будем использовать всегда, кроме Create User
+public class LoginHelpers extends CommonHelper { // phonebook.Login отдельно, потомучто его будем использовать всегда, кроме Create User
 
     By loginForm = By.id("login-form");
     By emailField = By.cssSelector("[placeholder=\"Email\"]");
@@ -14,7 +14,10 @@ public class Login extends TestBase { // phonebook.Login отдельно, по�
 
     By contactsTable = By.id("contacts-list");
 
-    @BeforeMethod
+    public LoginHelpers(WebDriver driver) {
+        super(driver);//super, чтобы иницыализировался драйвер
+    }
+
     public void login() {
         String userEmail = "test@gmail.com";
         String password = "test@gmail.com";
@@ -23,7 +26,6 @@ public class Login extends TestBase { // phonebook.Login отдельно, по�
         fillField(userEmail, emailField);
         fillField(password, passwordField);
         driver.findElement(loginButton).click();
-
         Assert.assertTrue(isElementPresent(contactsTable));// если прыйдет исключение, то прийдет false
     }
 }

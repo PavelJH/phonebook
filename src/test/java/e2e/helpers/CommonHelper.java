@@ -1,41 +1,28 @@
-package phonebook;
+package e2e.helpers;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import com.google.common.io.Files;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
+import java.io.File;
+import java.io.IOException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 
-import java.lang.reflect.Method;
-import java.util.concurrent.TimeUnit;
-
-
-public class TestBase {
+public class CommonHelper  { // самый базовый helper// хранятся все основные(для всего общего) методы
     WebDriver driver;
-    public static Logger logger() {
-        return LoggerFactory.getLogger(TestBase.class);
+    public WebDriverWait wait;
+    public CommonHelper(WebDriver driver) {
+        this.driver = driver;
+    }
+    public WebDriverWait setWait(){
+        wait = new WebDriverWait(driver, 10);
+        return wait;
     }
 
-    @BeforeClass
-    public static void setUp() {
-        WebDriverManager.chromedriver().setup();
-        logger().info("Setup chrome driver");
-    }
-
-    @BeforeMethod
-    public void setupTest() {
-        driver = new ChromeDriver();
-        driver.get("http://phonebook.telran-edu.de:8080/");
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        logger().info("Star test");
-    }
     public void fillField(String userData, By locator) {
         driver.findElement(locator).click();
         driver.findElement(locator).clear();//desFill
@@ -61,18 +48,24 @@ public class TestBase {
             return false;
         }
     }
-    public void CheckItemText(By locator, String expectedText, String err) {// перенесли с register
-        String actualText = driver.findElement(locator).getText(); // find text error message
-        // тут вырезали и перенесли в checkErrorMessage
+    public void clickOnVisibleElement(By locator) {
+        Assert.assertTrue(isElementPresent(locator));
+        driver.findElement(locator).click();
+    }
+    public void openDialog(By locator) {
+        clickOnVisibleElement(locator);
+        setWait().until(ExpectedConditions.visibilityOfElementLocated
+                (By.xpath("//*[@role='dialog']")));
+    }
+    public void checkItemText(By locator, String expectedText, String err) {
+        String actualText = driver.findElement(locator).getText();
         Assert.assertEquals(actualText, expectedText, err);
     }
-    @AfterMethod
-    public void tearDown() throws InterruptedException {
-        Thread.sleep(1000);
-        if (driver != null) {
-            driver.quit();
-        }
-        logger().info("Stop test");
-    }
+    public String takeScreenshot() throws IOException {
+        File tmp = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        File screenshot = new File("reference/screen" + System.currentTimeMillis() + ".png"); // System.currentTimeMillis() - время
 
+        Files.copy(tmp,screenshot);
+        return screenshot.getAbsolutePath();
     }
+}

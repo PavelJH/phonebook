@@ -1,21 +1,20 @@
 package api.tests.contact;
 
 import api.enums.EndPoint;
-import api.model.ContactDto;
+import api.model.contact.ContactDto;
 import api.tests.ApiBase;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Random;
-
 public class DeleteContactTest extends ApiBase {
     int id;
+    int wrongId;
     Response response;
     ContactDto contactDto;
 
-    String errorMessage = "Error! This contact doesn't exist in our DB";
+
 
     @BeforeMethod(onlyForGroups = {"positive"})
     public void precondition(){
@@ -32,10 +31,9 @@ public class DeleteContactTest extends ApiBase {
 
     @Test
     public void deleteContactWithoutId() {
-        Random rnd = new Random();
-        int wrongId = 100000 + rnd.nextInt(900000);
+        int wrongId = getWrongId();
         response = doDeleteRequest(EndPoint.DELETE_CONTACT, 500, wrongId);
-        Assert.assertEquals(response.jsonPath().getString("message"), errorMessage);
+        Assert.assertEquals(response.jsonPath().getString("message"), ERROR_MESSAGE_FOR_CONTACT);
     }
 
 }
