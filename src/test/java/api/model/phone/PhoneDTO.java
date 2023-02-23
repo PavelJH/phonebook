@@ -1,4 +1,4 @@
-package api.model.email;
+package api.model.phone;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -12,10 +12,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties// это то что необязательно
-@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)// - для того чтобы ы неуказаных полях, невключать в тедо запроса
 
-public class EmailDto {
-    int id;
-    String email;
+public class PhoneDTO {
+
+    String countryCode;
+    String phoneNumber;
     int contactId;
+
 }

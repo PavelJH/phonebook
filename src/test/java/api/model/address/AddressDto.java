@@ -1,6 +1,5 @@
-package api.model.email;
+package api.model.address;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,11 +10,11 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties// это то что необязательно
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-
-public class EmailDto {
-    int id;
-    String email;
+public class AddressDto {
+    String city;
+    String country;
+    String street;
+    String zip;
     int contactId;
 }

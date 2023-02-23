@@ -22,7 +22,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties// это то что необязательно
-@JsonInclude(JsonInclude.Include.NON_NULL)// - для того чтобы ы неуказаных полях, невключать в тедо запроса
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)// - для того чтобы ы неуказаных полях, невключать в тедо запроса
 public class ContactDto {
     //int id; // делаем его необязательным
     String firstName;
