@@ -7,13 +7,16 @@ import e2e.helpers.RegisterHelpers;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.awt.*;
+import java.io.IOException;
+
 public class RegisterNewUserTest extends TestBase {
 
     Faker faker = new Faker();
 
     //Positive
     @Test
-    public void registerNewUserWithVavalidData() {
+    public void registerNewUserWithVavalidData() throws IOException, AWTException, InterruptedException {
         //Arrange - Данные
         String userData = faker.internet().emailAddress();
         String password = faker.internet().password();
@@ -23,12 +26,15 @@ public class RegisterNewUserTest extends TestBase {
         driver.findElement(userRegistrationLink).click();
         driver.findElement(registrationForm).isDisplayed();
         */
+        //app.getRegister().deleteFiles("records");
+        app.getRegister().startRecording();
         app.getRegister().goToRegistrationPage(); // все что выше три строчки
         app.getRegister().fillRegistrationForm(userData, password);
         app.getRegister().clickSingUpButton();
         //Assert
         app.getRegister().checkErrorMessage(app.getRegister().errorMessageBlock, expectedErrorMessage); // от вынесеного 4-го метода
-
+        Thread.sleep(5000);
+        app.getRegister().stopRecording();
 
         /* Incorrect
 
@@ -75,9 +81,6 @@ public class RegisterNewUserTest extends TestBase {
         Assert.assertEquals(actualPasswordErrorMessage, expectedPasswordErrorMessage, err);// notEquals
         */
     }
-
-
-
 
     //Negative
     @Test

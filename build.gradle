@@ -1,40 +1,15 @@
 plugins {
     id 'java'
-    id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.13'
-    id 'org.beryx.jlink' version '2.25.0'
 }
 
-group 'com.example'
+group 'org.example'
 version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
-ext {
-    junitVersion = '5.9.1'
-}
-
-sourceCompatibility = '17'
-targetCompatibility = '17'
-
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
-}
-
-application {
-    mainModule = 'com.example.demo'
-    mainClass = 'com.example.demo.HelloApplication'
-}
-
-javafx {
-    version = '17.0.2'
-    modules = ['javafx.controls', 'javafx.fxml']
-}
-
 dependencies {
-
     implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '5.3.1'
     implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
     implementation group: 'org.testng', name: 'testng', version: '7.1.0'
@@ -44,21 +19,16 @@ dependencies {
     testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '5.3.0'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.14.1'
     testImplementation 'org.projectlombok:lombok:1.18.22'
-
+    implementation group: 'com.github.stephenc.monte', name: 'monte-screen-recorder', version: '0.7.7.0'
 }
 
 test {
-    useJUnitPlatform()
+    useTestNG()
 }
 
-jlink {
-    imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
-    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
-    launcher {
-        name = 'app'
+task testUser(type: Test) { //это шаблон, можно копировать и менять пути к новым созданым xml
+    useTestNG() {
+        suites 'src/test/resources/testngSmoke.xml'
     }
-}
 
-jlinkZip {
-    group = 'distribution'
 }

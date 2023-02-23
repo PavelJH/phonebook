@@ -29,8 +29,8 @@ public class  TestBase {
     @BeforeMethod
     public void setupTest() {
         app.init();
-
-    }@BeforeMethod
+    }
+    @BeforeMethod
     public void startTest(Method m, Object[] p) {// ниже Arrays (выводить параметрихацию в log)
         logger().info("Start test " + m.getName() + " with data: " + Arrays.asList(p));// будет в лог показываться данные dataProvide
     }
@@ -44,11 +44,10 @@ public class  TestBase {
     @AfterMethod
     public void stopTest(ITestResult result) throws IOException {
         if(result.isSuccess()){
-            logger().info("PASSED" + result.getMethod().getMethodName());
+            logger().info("PASSED" + result.getMethod().getMethodName() + app.getRegister().deleteFiles("records"));//можно и с логами и тд, главное указывать путь
         }else{
             logger().info("FAILED" + result.getMethod().getMethodName() + "Screenshot path: " + app.takeScreenshot());
         }
     logger().info("=========================================================================");
 }
-
     }

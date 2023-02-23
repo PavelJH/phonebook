@@ -19,6 +19,7 @@ public class ApiBase {
     final String BASE_URI = "http://phonebook.telran-edu.de:8080";
     final String API_KEY = "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6InRlc3RAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sImV4cCI6MjEwNjk3ODI5Nn0.GM1wsoRV2QoAsD6wKmIk7N49DDpuCejK4BC9H9YItJvesH5vft8HO2uqTPnGQJwJ5oXKS2OILqP1yoanMnIMkA";
 
+
     protected final String ERROR_MESSAGE_FOR_CONTACT = "Error! This contact doesn't exist in our DB";
     protected final String ERROR_MESSAGE_FOR_EMAIL = "Error! This email doesn't exist in our DB";
         RequestSpecification spec = new RequestSpecBuilder() // чтото обшее для всех нашых методов
