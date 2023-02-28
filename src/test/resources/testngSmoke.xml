@@ -7,4 +7,5 @@
             <class name="api.tests.phone.AddNewPhoneTest"/>
         </classes>
     </test>
+
 </suite>
