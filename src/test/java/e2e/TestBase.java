@@ -20,11 +20,11 @@ public class  TestBase {
         return LoggerFactory.getLogger(TestBase.class);
     }
 
-    @BeforeClass
-    public static void setUp() {
-        WebDriverManager.chromedriver().setup();
-        logger().info("Setup chrome driver");
-    }
+//    @BeforeClass
+//    public static void setUp() {
+//        WebDriverManager.chromedriver().setup();
+//        logger().info("Setup chrome driver");
+//    }
 
     @BeforeMethod
     public void setupTest() {
@@ -42,11 +42,11 @@ public class  TestBase {
     }
 
     @AfterMethod
-    public void stopTest(ITestResult result) throws IOException {
+    public void stopTest(ITestResult result){
         if(result.isSuccess()){
             logger().info("PASSED" + result.getMethod().getMethodName());
         }else{
-            logger().info("FAILED" + result.getMethod().getMethodName() + "Screenshot path: " + app.takeScreenshot());
+            logger().info("FAILED" + result.getMethod().getMethodName());
         }
     logger().info("=========================================================================");
 }
